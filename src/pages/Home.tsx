@@ -74,6 +74,9 @@ const Home = () => {
       
       {/* Hero Section */}
       <section className="pt-32 sm:pt-40 pb-12 sm:pb-20 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-br from-vanilla/60 via-arylide-yellow/20 to-vanilla/40 w-full max-w-full">
+        <div className="absolute -top-16 -right-20 w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-br from-green-300/40 to-jonquil/20 blur-3xl rounded-full float-slow"></div>
+        <div className="absolute top-24 -left-20 w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-br from-arylide-yellow/40 to-vanilla/40 blur-3xl rounded-full float-reverse"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-t from-vanilla/70 to-transparent"></div>
         <div className="max-w-6xl mx-auto text-center relative z-10" data-aos="fade-up">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight font-semibold text-gray-900 tracking-tight mb-4 sm:mb-6">
             Cultivating A 
@@ -94,7 +97,7 @@ const Home = () => {
           <div className="flex justify-center">
             <button 
               onClick={scrollToFeatures}
-              className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-transform duration-300 hover:scale-110 shadow-lg shadow-green-600/20 cursor-pointer"
+              className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition-transform duration-300 hover:scale-110 shadow-lg shadow-green-600/20 cursor-pointer float-slow"
             >
               <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
@@ -129,7 +132,7 @@ const Home = () => {
 
           {/* Middle Column: Quality Products with 2 sub-sections */}
           <div className="md:col-span-4 flex flex-col gap-4 sm:gap-6">
-            <div className="flex-1 bg-gradient-to-br from-vanilla to-arylide-yellow/30 rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center justify-center text-center border border-jonquil/20 min-h-[180px] sm:min-h-auto" data-aos="fade-up" data-aos-delay="200">
+            <div className="flex-1 bg-gradient-to-br from-vanilla to-arylide-yellow/30 rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center justify-center text-center border border-jonquil/20 min-h-[180px] sm:min-h-auto shimmer-soft" data-aos="fade-up" data-aos-delay="200">
               <div className="w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4 text-green-600">
                 <Award className="w-full h-full stroke-1" />
               </div>
@@ -203,7 +206,7 @@ const Home = () => {
           </div>
 
           <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" data-aos="fade-up">
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center gap-3 mb-3">
                 <ShieldCheck className="w-5 h-5 text-green-600" />
                 <h3 className="text-sm font-semibold text-gray-900">Trustworthy Guidance</h3>
@@ -212,7 +215,7 @@ const Home = () => {
                 Evidence-based recommendations and local insights to help farmers make confident decisions.
               </p>
             </div>
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center gap-3 mb-3">
                 <BarChart3 className="w-5 h-5 text-green-600" />
                 <h3 className="text-sm font-semibold text-gray-900">Actionable Analytics</h3>
@@ -221,7 +224,7 @@ const Home = () => {
                 Clear dashboards that translate soil, crop, and market data into next steps.
               </p>
             </div>
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center gap-3 mb-3">
                 <CloudRain className="w-5 h-5 text-green-600" />
                 <h3 className="text-sm font-semibold text-gray-900">Climate-Smart Focus</h3>
@@ -363,15 +366,15 @@ const Home = () => {
           <span className="text-yellow-500 font-semibold text-xs tracking-wider uppercase mb-4 block">Our Product Details</span>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10" data-aos="fade-up">
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <h3 className="text-sm font-semibold text-gray-900 mb-2">AI Crop Advisor</h3>
               <p className="text-xs text-gray-500 leading-relaxed">Personalized crop plans based on soil, season, and local conditions.</p>
             </div>
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <h3 className="text-sm font-semibold text-gray-900 mb-2">Soil Health Studio</h3>
               <p className="text-xs text-gray-500 leading-relaxed">Nutrient insights, fertilizer balance, and field-level tracking.</p>
             </div>
-            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <h3 className="text-sm font-semibold text-gray-900 mb-2">Market Pulse</h3>
               <p className="text-xs text-gray-500 leading-relaxed">Price trends and demand signals to plan selling windows.</p>
             </div>

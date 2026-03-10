@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import Loader from "./components/Loader";
 
 // Eager load critical pages
 import Home from "./pages/Home";
@@ -24,13 +25,6 @@ const MarketRates = lazy(() => import("./pages/MarketRates"));
 const KhataBook = lazy(() => import("./pages/KhataBook"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Loading fallback for public routes only (kept minimal)
-const PublicPageLoader = () => (
-  <div className="flex items-center justify-center p-8">
-    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-  </div>
-);
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -43,7 +37,7 @@ const queryClient = new QueryClient({
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<PublicPageLoader />}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />
@@ -71,14 +65,27 @@ const AppRoutes = () => {
   );
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Toaster position="top-right" expand={true} richColors />
-      <AppRoutes />
-    </BrowserRouter>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowSplash(false), 2500);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (showSplash) {
+    return <Loader />;
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Toaster position="top-right" expand={true} richColors />
+        <AppRoutes />
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
