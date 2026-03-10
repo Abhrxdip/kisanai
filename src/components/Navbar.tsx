@@ -153,7 +153,7 @@ const Navbar = () => {
             </ul>
 
             <div className="flex items-center gap-1.5 md:gap-2">
-              <Link to="/login" className="hidden md:inline-flex">
+              <Link to="/login" className="inline-flex">
                 <button className="px-4 py-2 rounded-full text-xs font-semibold border border-gray-200 hover:border-green-600 hover:text-green-700 transition-all duration-300">
                   Login
                 </button>
