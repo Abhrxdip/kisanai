@@ -25,16 +25,15 @@ An intelligent agricultural assistance platform built with React and TypeScript,
 
 ```
 kisanai/
-├── frontend/           # React frontend application
-│   ├── src/
-│   │   ├── components/ # Reusable UI components
-│   │   ├── pages/      # Page components
-│   │   ├── services/   # API and services
-│   │   ├── hooks/      # Custom React hooks
-│   │   └── lib/        # Utility functions
-│   └── public/         # Static assets
-├── package.json        # Root package configuration
-└── vercel.json        # Vercel deployment config
+├── public/             # Static assets
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── services/       # API and services
+│   ├── hooks/          # Custom React hooks
+│   └── lib/            # Utility functions
+├── package.json        # Project configuration
+└── vercel.json         # Vercel deployment config
 ```
 
 ## Getting Started
@@ -54,7 +53,7 @@ cd kisanai
 
 2. Install dependencies:
 ```bash
-npm run install:all
+npm install
 ```
 
 3. Start the development server:
@@ -69,7 +68,7 @@ The application will be available at `http://localhost:5173`
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
-- `npm run install:all` - Install all dependencies
+- `npm run lint` - Lint the codebase
 
 ## Deployment
 
