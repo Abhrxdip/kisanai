@@ -1,0 +1,3 @@
+services:
+  # Frontend is deployed on Vercel (see vercel.json)
+  # Backend has been removed — all data is served from mock API in the frontend

@@ -1,0 +1,21 @@
+{
+  "name": "kisanai-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kisan AI - Agricultural assistance platform",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install",
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview"
+  },
+  "workspaces": [
+    "frontend"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Abhrxdip/kisanai.git"
+  },
+  "author": "Abhrxdip",
+  "license": "MIT"
+}
