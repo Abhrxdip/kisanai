@@ -1,13 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/custom/Button";
 import { Sprout, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pendingScrollTarget, setPendingScrollTarget] = useState<string | null>(null);
+  const scrollLockY = useRef(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -29,7 +31,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSectionImmediate = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({
@@ -37,7 +39,15 @@ const Navbar = () => {
         block: 'start'
       });
     }
-    closeMobileMenu(); // Close mobile menu after clicking
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    if (isMobileMenuOpen) {
+      setPendingScrollTarget(sectionId);
+      closeMobileMenu();
+      return;
+    }
+    scrollToSectionImmediate(sectionId);
   };
 
   // Prevent body scroll when mobile menu is open
@@ -45,6 +55,7 @@ const Navbar = () => {
     if (isMobileMenuOpen) {
       // Save current scroll position
       const scrollY = window.scrollY;
+      scrollLockY.current = scrollY;
       
       // Prevent scrolling on body and document
       document.body.style.position = 'fixed';
@@ -54,7 +65,7 @@ const Navbar = () => {
       document.documentElement.style.overflow = 'hidden';
     } else {
       // Restore scrolling
-      const scrollY = document.body.style.top;
+      const shouldRestoreScroll = !pendingScrollTarget;
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
@@ -62,8 +73,14 @@ const Navbar = () => {
       document.documentElement.style.overflow = '';
       
       // Restore scroll position
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      if (shouldRestoreScroll) {
+        window.scrollTo(0, scrollLockY.current);
+      } else if (pendingScrollTarget) {
+        const target = pendingScrollTarget;
+        setPendingScrollTarget(null);
+        setTimeout(() => {
+          scrollToSectionImmediate(target);
+        }, 0);
       }
     }
 
@@ -75,7 +92,7 @@ const Navbar = () => {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, pendingScrollTarget]);
 
   // Only show navbar for non-authenticated users
   if (isLoggedIn) {
@@ -86,44 +103,45 @@ const Navbar = () => {
     { name: "Home", path: "/", type: "link" },
     { name: "About Us", path: "about", type: "scroll" },
     { name: "Our Services", path: "products", type: "scroll" },
+    { name: "Contact", path: "/contact", type: "link" },
   ];
 
   return (
     <>
       {/* Main Navbar - Hidden when mobile menu is open */}
-      <div className={`fixed z-40 bg-transparent pt-4 pr-4 pb-4 pl-4 sm:pt-6 sm:pr-6 sm:pb-6 sm:pl-6 top-0 right-0 left-0 transition-opacity duration-300 ${
+      <div className={`relative z-40 bg-transparent pt-3 pr-3 pb-2 pl-3 sm:pt-4 sm:pr-4 sm:pb-3 sm:pl-4 transition-opacity duration-300 ${
         isMobileMenuOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'
       }`}>
         <div 
-          className="max-w-6xl border-black/5 border rounded-full mr-auto ml-auto pt-3 pr-4 pb-3 pl-4 sm:pr-6 sm:pl-6" 
+          className="max-w-6xl border-black/5 border rounded-full mr-auto ml-auto py-2.5 sm:py-3 px-4 sm:px-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)]" 
           style={{
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6)) padding-box, linear-gradient(120deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2)) border-box',
-            border: '1px solid rgba(0,0,0,0.05)',
-            backdropFilter: 'blur(16px) saturate(120%)',
-            WebkitBackdropFilter: 'blur(16px) saturate(120%)',
-            boxShadow: '0 4px 30px rgba(0,0,0,0.05)'
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.7)) padding-box, linear-gradient(120deg, rgba(255,255,255,0.9), rgba(255,255,255,0.2)) border-box',
+            border: '1px solid rgba(0,0,0,0.06)',
+            backdropFilter: 'blur(18px) saturate(130%)',
+            WebkitBackdropFilter: 'blur(18px) saturate(130%)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.7)'
           }}
         >
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-              <Sprout className="text-green-600 h-6 w-6" />
-              <span className="font-bold text-lg tracking-tight text-gray-900">KisanAI</span>
+              <Sprout className="text-green-600 h-5 w-5" />
+              <span className="font-bold text-base tracking-tight text-gray-900">KisanAI</span>
             </Link>
 
-            <ul className="hidden md:flex items-center gap-1 text-sm font-medium text-gray-600">
+            <ul className="hidden md:flex items-center gap-1 text-xs font-medium text-gray-600">
               {navItems.map((item) => (
                 <li key={item.path}>
                   {item.type === "scroll" ? (
                     <button
                       onClick={() => scrollToSection(item.path)}
-                      className="hover:text-green-700 transition-colors duration-300 px-4 py-2 rounded-full hover:bg-green-50/50"
+                      className="hover:text-green-700 transition-colors duration-300 px-3 py-2 rounded-full hover:bg-green-50/50"
                     >
                       {item.name}
                     </button>
                   ) : (
                     <Link
                       to={item.path}
-                      className={`hover:text-green-700 transition-colors duration-300 px-4 py-2 rounded-full hover:bg-green-50/50 ${
+                      className={`hover:text-green-700 transition-colors duration-300 px-3 py-2 rounded-full hover:bg-green-50/50 ${
                         location.pathname === item.path ? "text-green-700 bg-green-50/50" : ""
                       }`}
                     >
@@ -136,12 +154,12 @@ const Navbar = () => {
 
             <div className="flex items-center gap-1.5 md:gap-2">
               <Link to="/login" className="hidden md:inline-flex">
-                <button className="px-5 py-2.5 rounded-full text-xs font-semibold border border-gray-200 hover:border-green-600 hover:text-green-700 transition-all duration-300">
+                <button className="px-4 py-2 rounded-full text-xs font-semibold border border-gray-200 hover:border-green-600 hover:text-green-700 transition-all duration-300">
                   Login
                 </button>
               </Link>
               <Link to="/register" className="hidden md:inline-flex">
-                <button className="px-5 py-2.5 rounded-full text-xs font-semibold bg-green-600 text-white hover:bg-green-700 transition-all duration-300">
+                <button className="px-4 py-2 rounded-full text-xs font-semibold bg-green-600 text-white hover:bg-green-700 transition-all duration-300">
                   Get Started
                 </button>
               </Link>

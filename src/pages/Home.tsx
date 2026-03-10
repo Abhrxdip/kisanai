@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Sprout, Leaf, Award, Flower, ArrowDown, ArrowRight, ArrowUpRight, Plus, Minus } from "lucide-react";
+import { Sprout, Leaf, Award, Flower, ArrowDown, ArrowRight, ArrowUpRight, Plus, Minus, ShieldCheck, BarChart3, CloudRain } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
@@ -113,6 +113,8 @@ const Home = () => {
               src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=2071&auto=format&fit=crop" 
               className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700" 
               alt="Farmer"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 to-transparent"></div>
             
@@ -140,6 +142,8 @@ const Home = () => {
                 src="/images/farmland.jpg" 
                 className="w-full h-full object-cover" 
                 alt="Agriculture"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -151,6 +155,8 @@ const Home = () => {
               src="/images/farmland.jpg" 
               className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700" 
               alt="Natural Farming"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 to-transparent"></div>
             
@@ -166,7 +172,7 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-arylide-yellow/20 via-vanilla to-vanilla/60 w-full overflow-x-hidden">
+      <section id="about" className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-arylide-yellow/20 via-vanilla to-vanilla/60 w-full overflow-x-hidden scroll-mt-24 sm:scroll-mt-32">
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12" data-aos="fade-up">
             <div className="max-w-xl">
@@ -191,7 +197,39 @@ const Home = () => {
               src="/images/about-us.jpg" 
               alt="Watering Can" 
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
+          </div>
+
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" data-aos="fade-up">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <ShieldCheck className="w-5 h-5 text-green-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Trustworthy Guidance</h3>
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Evidence-based recommendations and local insights to help farmers make confident decisions.
+              </p>
+            </div>
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <BarChart3 className="w-5 h-5 text-green-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Actionable Analytics</h3>
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Clear dashboards that translate soil, crop, and market data into next steps.
+              </p>
+            </div>
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <CloudRain className="w-5 h-5 text-green-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Climate-Smart Focus</h3>
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Tools that help adapt planting and irrigation based on local weather patterns.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -243,6 +281,8 @@ const Home = () => {
                 src="/images/why-choose1.jpg" 
                 className="w-full h-full object-cover" 
                 alt="Farmer in field"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             
@@ -318,9 +358,25 @@ const Home = () => {
       </section>
 
       {/* Products Section (Beige) */}
-      <section id="products" className="py-8 sm:py-12 px-4 sm:px-6 bg-gradient-to-br from-arylide-yellow/20 via-vanilla to-vanilla/80 w-full overflow-x-hidden">
+      <section id="products" className="py-8 sm:py-12 px-4 sm:px-6 bg-gradient-to-br from-arylide-yellow/20 via-vanilla to-vanilla/80 w-full overflow-x-hidden scroll-mt-24 sm:scroll-mt-32">
         <div className="max-w-7xl mx-auto w-full">
           <span className="text-yellow-500 font-semibold text-xs tracking-wider uppercase mb-4 block">Our Product Details</span>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10" data-aos="fade-up">
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">AI Crop Advisor</h3>
+              <p className="text-xs text-gray-500 leading-relaxed">Personalized crop plans based on soil, season, and local conditions.</p>
+            </div>
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Soil Health Studio</h3>
+              <p className="text-xs text-gray-500 leading-relaxed">Nutrient insights, fertilizer balance, and field-level tracking.</p>
+            </div>
+            <div className="bg-white/80 border border-jonquil/20 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Market Pulse</h3>
+              <p className="text-xs text-gray-500 leading-relaxed">Price trends and demand signals to plan selling windows.</p>
+            </div>
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-8 sm:gap-12">
             
             <div className="lg:w-1/2" data-aos="fade-right">

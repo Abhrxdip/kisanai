@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 
 // Lazy load secondary pages for better initial load performance
 const Register = lazy(() => import("./pages/Register"));
+const Contact = lazy(() => import("./pages/Contact"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Weather = lazy(() => import("./pages/Weather"));
 const CropRecommender = lazy(() => import("./pages/CropRecommender"));
@@ -19,7 +20,6 @@ const FertilizerPrediction = lazy(() => import("./pages/FertilizerPrediction"));
 const Results = lazy(() => import("./pages/Results"));
 const SoilReports = lazy(() => import("./pages/SoilReports"));
 const Feedback = lazy(() => import("./pages/Feedback"));
-const Contact = lazy(() => import("./pages/Contact"));
 const MarketRates = lazy(() => import("./pages/MarketRates"));
 const KhataBook = lazy(() => import("./pages/KhataBook"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -48,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
@@ -59,7 +60,6 @@ const AppRoutes = () => {
           <Route path="/results" element={<Results />} />
           <Route path="/soil-reports" element={<SoilReports />} />
           <Route path="/feedback" element={<Feedback />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/market-rates" element={<MarketRates />} />
           <Route path="/khata-book" element={<KhataBook />} />
         </Route>
